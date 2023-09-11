@@ -38,7 +38,7 @@ def do(username, password):
     # O utilizamos una existente
     session  = None
     try:
-        settings_file = f"{username}_{settings_file_sufix}.json"
+        settings_file = f"data/{username}_{settings_file_sufix}.json"
         if not os.path.isfile(settings_file):
             print(f'Unable to find file: {settings_file}')
             session = Client(username, password,on_login=lambda x: onlogin_callback(x, settings_file))
@@ -86,7 +86,7 @@ def do(username, password):
 
 
     # SEGUNDO: Abrimos el archivo con nuestros followers anteriores.
-    followers_file = f"{username}_followers.json"
+    followers_file = f"data/{username}_followers.json"
     try:
         with open(followers_file) as f:
             followers_anteriores = json.load(f)
@@ -107,7 +107,7 @@ def do(username, password):
         f.write(json.dumps(followers_actuales))
 
     # CUARTO(2): Guardamos los que me dejaron de seguir en la lista negra.
-    unfollowers_file = f"{username}_unfollowers.json"
+    unfollowers_file = f"data/{username}_unfollowers.json"
     with open(unfollowers_file, "a") as f:
         f.write(json.dumps(me_dejaron_de_seguir) + "\n")
 
