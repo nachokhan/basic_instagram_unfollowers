@@ -1,4 +1,4 @@
-# Add Users
+# Add Instagram Accounts
 
 1. Make a copy of the `user_and_pass.py.sample` file.
 2. Remove the ".sample" extension.
