@@ -1,0 +1,5 @@
+users_pass = {
+    "username1": "pass_for_that_user",
+    "usermane2": "pass_for_that_user",
+    # ...
+}
