@@ -34,7 +34,7 @@ def onlogin_callback(session, new_settings_file):
 
 def login(username, password):
     try:
-        settings_file = f"{username}_{settings_file_sufix}.json"
+        settings_file = f"data/{username}_{settings_file_sufix}.json"
         if not os.path.isfile(settings_file):
             print(f'Unable to find file: {settings_file}')
             session = Client(username, password,on_login=lambda x: onlogin_callback(x, settings_file))
