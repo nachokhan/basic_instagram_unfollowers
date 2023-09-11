@@ -1,4 +1,4 @@
 user_and_pass.py
-data
+*.json
 .env
 __pycache__
