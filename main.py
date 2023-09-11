@@ -32,13 +32,9 @@ def onlogin_callback(session, new_settings_file):
         print('SAVED: {0!s}'.format(new_settings_file))
 
 
-def do(username, password):
-
-    # Creamos una sesión de Instagram
-    # O utilizamos una existente
-    session  = None
+def login(username, password):
     try:
-        settings_file = f"data/{username}_{settings_file_sufix}.json"
+        settings_file = f"{username}_{settings_file_sufix}.json"
         if not os.path.isfile(settings_file):
             print(f'Unable to find file: {settings_file}')
             session = Client(username, password,on_login=lambda x: onlogin_callback(x, settings_file))
@@ -65,7 +61,14 @@ def do(username, password):
     cookie_expiry = session.cookie_jar.auth_expires
     print('Cookie Expiry: {0!s}'.format(datetime.datetime.fromtimestamp(cookie_expiry).strftime('%Y-%m-%dT%H:%M:%SZ')))
 
+    return session, settings_file
 
+
+def do(username, password):
+
+    # Creamos una sesión de Instagram
+    # O utilizamos una existente
+    session, cookie_file  = login(username, password)
 
     # Creamos las listas que utilizaremos para ver quien 
     # no nos quiere ver más. 
@@ -77,12 +80,18 @@ def do(username, password):
     user_id = session.authenticated_user_id
     rank_token = session.generate_uuid()
     next_max_id = ""
+
     while True:
-        results = session.user_followers(user_id, rank_token, max_id=next_max_id)
-        followers_actuales.extend(results['users'])
-        next_max_id = results.get('next_max_id')
-        if not next_max_id:
-            break
+        try:
+            results = session.user_followers(user_id, rank_token, max_id=next_max_id)
+            followers_actuales.extend(results['users'])
+            next_max_id = results.get('next_max_id')
+            if not next_max_id:
+                break
+        except Exception as ClientError:
+            print("Error in settings. File. Removing and trying again.")
+            os.remove(cookie_file)
+            session, cookie_file  = login(username, password)
 
 
     # SEGUNDO: Abrimos el archivo con nuestros followers anteriores.
