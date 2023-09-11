@@ -124,8 +124,8 @@ def do(username, password):
     # QUINTO: Mostramos los ex-seguidores
     if me_dejaron_de_seguir:
         print("YA NO ME QUIREN 😢: ")
-        for persona_buena in me_dejaron_de_seguir:
-            print(f"🙅🏻 {persona_buena['username']}")
+        for persona_mala in me_dejaron_de_seguir:
+            print(f"😡 {persona_mala['username']}")
     else:
         print("NADIE TE DEJO DE QUERER 😎")
 
@@ -134,7 +134,7 @@ def do(username, password):
     if nuevos_seguidores:
         print("MIS NUEVOS SEGUIDORES 😎:")
         for persona_buena in nuevos_seguidores:
-            print(f"🙅🏻 {persona_buena['username']}")
+            print(f"🙂 {persona_buena['username']}")
     else:
         print("NO TENES SEGUIDORES NUEVOS 🫠")
 
