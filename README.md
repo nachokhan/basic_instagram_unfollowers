@@ -1,15 +1,10 @@
-DISCLAIMER:
-this is only for 
-
-Basic Instagram Unfollowers
-
-Add Users
+# Add Users
 
 1. Make a copy of the `user_and_pass.py.sample` file.
 2. Remove the ".sample" extension.
 3. Add all the users/passwords you want in the dictionary.
 
-Run the Project
+# Run the Project
 
 1. Create Environment
 
